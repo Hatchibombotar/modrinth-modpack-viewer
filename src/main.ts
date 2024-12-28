@@ -1,6 +1,7 @@
 import './style.css'
 import JSZip from 'jszip'
 import {saveAs} from "file-saver"
+import favicon from "/favicon.png?url"
 // import packIcon from './floatato.webp'
 
 const packIcon = "https://minecraft.wiki/images/Block_of_Amber.png"
@@ -8,7 +9,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 <div class="min-h-screen bg-slate-50 flex flex-col">
 
 <header class="px-3 py-2 flex items-center gap-2">
-  <a href="${getRoot()}"><img class="h-8 w-8" src="/favicon.png"></a>
+  <a href="${getRoot()}"><img class="h-8 w-8" src=${favicon}></a>
   <div>
     <h1>Modrinth Modpack Viewer</h1>
     <p>
