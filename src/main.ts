@@ -1,6 +1,6 @@
 import './style.css'
-import JSZip from 'jszip'
-import { saveAs } from "file-saver"
+// import JSZip from 'jszip'
+// import { saveAs } from "file-saver"
 import favicon from "/favicon.png?url"
 import { Data, loadData, saveData } from './data'
 // import packIcon from './floatato.webp'
@@ -132,31 +132,31 @@ function getRoot() {
 }
 
 
-function downloadAsModrinthPack(data: Data) {
-  var zip = new JSZip();
+// function downloadAsModrinthPack(data: Data) {
+//   var zip = new JSZip();
 
-  zip.file("modrinth.index.json", JSON.stringify({
-    "game": "minecraft",
-    "formatVersion": 1,
-    "versionId": data.versionId,
-    "name": data.name,
-    "summary": "",
-    "files":
-      data.files.map(x => ({
-        path: x[0],
-        downloads: [
-          x[1]
-        ]
-      }))
-    ,
-    "dependencies": Object.fromEntries(data.dependencies)
-  }, null, 4));
+//   zip.file("modrinth.index.json", JSON.stringify({
+//     "game": "minecraft",
+//     "formatVersion": 1,
+//     "versionId": data.versionId,
+//     "name": data.name,
+//     "summary": "",
+//     "files":
+//       data.files.map(x => ({
+//         path: x[0],
+//         downloads: [
+//           x[1]
+//         ]
+//       }))
+//     ,
+//     "dependencies": Object.fromEntries(data.dependencies)
+//   }, null, 4));
 
-  const fileName = data.name + " " + data.versionId + ".mrpack"
+//   const fileName = data.name + " " + data.versionId + ".mrpack"
 
-  zip.generateAsync({ type: "blob" })
-    .then(function (content) {
-      // see FileSaver.js
-      saveAs(content, fileName);
-    });
-}
+//   zip.generateAsync({ type: "blob" })
+//     .then(function (content) {
+//       // see FileSaver.js
+//       saveAs(content, fileName);
+//     });
+// }
