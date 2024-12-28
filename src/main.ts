@@ -2,6 +2,7 @@ import './style.css'
 import JSZip from 'jszip'
 import {saveAs} from "file-saver"
 import favicon from "/favicon.png?url"
+import { Data, loadData, saveData } from './data'
 // import packIcon from './floatato.webp'
 
 const packIcon = "https://minecraft.wiki/images/Block_of_Amber.png"
@@ -38,20 +39,18 @@ function downloadURI(uri: string, name: string) {
 }
 
 function init() {
-  const params = new URL(document.location.href)
-  .searchParams;
-  const data = params.get("data");
+  const data = loadData()
 
   const container = document.querySelector<HTMLDivElement>("#main-container")!
   if (data == null) {
     createUploadScreen(container)
   } else {
-    createDownloadScreen(container, JSON.parse(decodeURIComponent(data)))
+    createDownloadScreen(container, data)
   }
 }
 init()
 
-function createDownloadScreen(container: HTMLDivElement, data: any) {
+function createDownloadScreen(container: HTMLDivElement, data: Data) {
   container.innerHTML = `
   <div class="flex items-center gap-3">
     <img class="h-12 w-12" src=${packIcon}></img>
@@ -66,10 +65,10 @@ function createDownloadScreen(container: HTMLDivElement, data: any) {
   </div>
   <hr class="my-4"></hr>
   <div class="flex flex-col gap-2">
-    ${data.files.map((mod: any) => {
+    ${data.files.map((mod) => {
     return `<div class="bg-slate-50 border rounded-lg flex items-center gap-2 px-2 py-2">
-        <p class="">${mod.path.replace("mods/", "")}</p>
-        <a href=${mod.downloads[0]} class="bg-slate-200 hover:bg-slate-200/50 rounded-lg px-2 py-1 ml-auto text-sm font-medium">Download</a>
+        <p class="">${mod[0].replace("mods/", "")}</p>
+        <a href=${mod[1]} class="bg-slate-200 hover:bg-slate-200/50 rounded-lg px-2 py-1 ml-auto text-sm font-medium">Download</a>
       </div>`
   }).join("")
     }
@@ -77,7 +76,7 @@ function createDownloadScreen(container: HTMLDivElement, data: any) {
   <hr class="my-4"></hr>
   <h2 class="font-semibold mb-1">Dependencies</h2>
   <ul class="flex flex-col gap list-disc list-inside">
-    ${Object.entries(data.dependencies).map(([dependency, version]) => {
+    ${data.dependencies.map(([dependency, version]) => {
       return `<li class="">${dependency} ${version}</li>`
     }).join("")
     }
@@ -86,10 +85,11 @@ function createDownloadScreen(container: HTMLDivElement, data: any) {
   document.querySelector<HTMLButtonElement>('#download-all')!.addEventListener("click", () => {
     for (const i in data.files) {
       const file = data.files[i]
-      const download = file.downloads[0]
+      const path = file[0]
+      const download = file[1]
       setTimeout(
         () => {
-          downloadURI(download, file.path.replace("mods/", ""))
+          downloadURI(download, path.replace("mods/", ""))
         },
         Number(i) * 500
       )
@@ -126,9 +126,18 @@ function createUploadScreen(container: HTMLDivElement) {
   document.querySelector<HTMLButtonElement>('#upload')!.addEventListener("click", () => {
     const value = document.querySelector<HTMLTextAreaElement>('#textarea')!.value
 
-    JSON.parse(value)
+    const rawdata = JSON.parse(value)
 
-    document.location.href = getRoot() + "?data=" + encodeURIComponent(value)
+    saveData({
+      name: rawdata.name,
+      files: rawdata.files.map(
+        (file: any) => ([file.path, file.downloads[0]])
+      ),
+      versionId: rawdata.versionId,
+      dependencies: Object.entries(rawdata.dependencies)
+    })
+
+    // document.location.href = getRoot() + "?data=" + encodeURIComponent(value)
   })
 }
 
