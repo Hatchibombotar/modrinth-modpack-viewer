@@ -1,0 +1,88 @@
+{
+    "game": "minecraft",
+    "formatVersion": 1,
+    "versionId": "1.0.0",
+    "name": "December24 - Origins",
+    "summary": "",
+    "files": [
+        {
+            "path": "mods/fabric-api-0.110.0+1.21.1.jar",
+            "hashes": {
+                "sha1": "2b7f7f96571285868e962e269762987e817094ff",
+                "sha512": "db43c35873b0a0b073cf8c19d825a1db27d5c579c885091ddc462de783582c5c162d556b831915d1df46fbec781f0a9fe6c60a20ffa050915d80c5d99b9cb211"
+            },
+            "env": {
+                "server": "required",
+                "client": "required"
+            },
+            "downloads": [
+                "https://cdn.modrinth.com/data/P7dR8mSH/versions/Zp9iAZdZ/fabric-api-0.110.0%2B1.21.1.jar"
+            ],
+            "fileSize": 2384492
+        },
+        {
+            "path": "mods/Zoomify-2.14.2+1.21.1.jar",
+            "hashes": {
+                "sha1": "2a4c2770b97ec8888eaa4fb9f304e3505b7b42bc",
+                "sha512": "6623b97f6a90e60b0ec82e6fe20a79c2e4da3fc620d696735bc95184e0d7371362f6c8d6c278531917f7ad104fa8b8e37c4b202c95e663a060f23676b4cf2207"
+            },
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "downloads": [
+                "https://cdn.modrinth.com/data/w7ThoJFB/versions/mGFci27z/Zoomify-2.14.2%2B1.21.1.jar"
+            ],
+            "fileSize": 807934
+        },
+        {
+            "path": "mods/Origins-1.13.0-alpha.11+mc.1.21.1.jar",
+            "hashes": {
+                "sha512": "047e4e8eda16ed7c7c54da010257eecd2562ec646bdc5ac8a3d2f8333abbb68f4051c4c2e6a33297e665b79f4a2c909fbcaf3c3e40b81e320169b589e5e37877",
+                "sha1": "6ac71abcab6640e90fcc5ba885ce463438fc3da4"
+            },
+            "env": {
+                "server": "required",
+                "client": "required"
+            },
+            "downloads": [
+                "https://cdn.modrinth.com/data/3BeIrqZR/versions/wWB8cMrv/Origins-1.13.0-alpha.11%2Bmc.1.21.1.jar"
+            ],
+            "fileSize": 4606262
+        },
+        {
+            "path": "mods/YetAnotherConfigLib-3.6.2+1.21-fabric.jar",
+            "hashes": {
+                "sha1": "97f4b9793fbd2f06e2e8d93a7fe23f38799ed4a7",
+                "sha512": "0a52df2fd4126a994a2558d3c9464f886b0cb4bb7cb87cf36a12f87bd885e2525d562ff1d06625b4ff9911b89d31420e5d261ecd07f3b6ab47486543bdd017ad"
+            },
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "downloads": [
+                "https://cdn.modrinth.com/data/1eAoo2KR/versions/iu96ISLv/YetAnotherConfigLib-3.6.2%2B1.21-fabric.jar"
+            ],
+            "fileSize": 1108730
+        },
+        {
+            "path": "mods/DistantHorizons-2.2.1-a-1.21.1-neo-fabric.jar",
+            "hashes": {
+                "sha512": "915d15ac4bd898ee50c3e451e9c48e8f9aed86c421e56604cdbc1704035b9e5140f73cdecb783a4a6e87b7438ebc76f135eaad6eff2dacc6c8dba6ffb34cc0f8",
+                "sha1": "302ad0271f1b3d9029361c94cd5cf753a60960e5"
+            },
+            "env": {
+                "client": "required",
+                "server": "required"
+            },
+            "downloads": [
+                "https://cdn.modrinth.com/data/uCdwusMi/versions/pEvLEY5E/DistantHorizons-2.2.1-a-1.21.1-neo-fabric.jar"
+            ],
+            "fileSize": 16613008
+        }
+    ],
+    "dependencies": {
+        "minecraft": "1.21.1",
+        "fabric-loader": "0.16.9"
+    }
+}
