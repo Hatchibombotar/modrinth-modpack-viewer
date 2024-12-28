@@ -1,6 +1,6 @@
 import './style.css'
 import JSZip from 'jszip'
-import {saveAs} from "file-saver"
+import { saveAs } from "file-saver"
 import favicon from "/favicon.png?url"
 import { Data, loadData, saveData } from './data'
 // import packIcon from './floatato.webp'
@@ -61,7 +61,7 @@ function createDownloadScreen(container: HTMLDivElement, data: Data) {
   </div>
   <div class="mt-2 flex flex-wrap gap-2">
     <button id="download-all" class="bg-slate-200 hover:bg-slate-200/50 font-medium rounded-lg px-2 py-1">Download All</button>
-    <button id="download-all-as-modpack" class="bg-green-400 hover:bg-green-400/50 font-medium rounded-lg px-2 py-1">Download as Modpack</button>
+    <!--- <button id="download-all-as-modpack" class="bg-green-400 hover:bg-green-400/50 font-medium rounded-lg px-2 py-1">Download as Modpack</button> -->
   </div>
   <hr class="my-4"></hr>
   <div class="flex flex-col gap-2">
@@ -96,23 +96,9 @@ function createDownloadScreen(container: HTMLDivElement, data: Data) {
     }
   })
 
-  document.querySelector<HTMLButtonElement>('#download-all-as-modpack')!.addEventListener("click", () => {
-    var zip = new JSZip();
-
-    zip.file("modrinth.index.json", JSON.stringify(data));
-    // for (const i in data.files) {
-    //   const file = data.files[i]
-    //   const download = file.downloads[0]
-    // }
-
-    const fileName = data.name + " " + data.versionId + ".mrpack"
-
-    zip.generateAsync({type:"blob"})
-    .then(function(content) {
-        // see FileSaver.js
-        saveAs(content, fileName);
-    });
-  })
+  // document.querySelector<HTMLButtonElement>('#download-all-as-modpack')!.addEventListener("click", () => {
+  //   downloadAsModrinthPack(data)
+  // })
 }
 
 function createUploadScreen(container: HTMLDivElement) {
@@ -143,4 +129,34 @@ function createUploadScreen(container: HTMLDivElement) {
 
 function getRoot() {
   return document.location.origin + document.location.pathname
+}
+
+
+function downloadAsModrinthPack(data: Data) {
+  var zip = new JSZip();
+
+  zip.file("modrinth.index.json", JSON.stringify({
+    "game": "minecraft",
+    "formatVersion": 1,
+    "versionId": data.versionId,
+    "name": data.name,
+    "summary": "",
+    "files":
+      data.files.map(x => ({
+        path: x[0],
+        downloads: [
+          x[1]
+        ]
+      }))
+    ,
+    "dependencies": Object.fromEntries(data.dependencies)
+  }, null, 4));
+
+  const fileName = data.name + " " + data.versionId + ".mrpack"
+
+  zip.generateAsync({ type: "blob" })
+    .then(function (content) {
+      // see FileSaver.js
+      saveAs(content, fileName);
+    });
 }
